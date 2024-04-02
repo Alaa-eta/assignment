@@ -23,7 +23,7 @@ Route::get('/js', function () {
 });
 
 
-Route::get('fullcalender', [FullCalenderController::class, 'index']);
+Route::get('full-calender', [FullCalenderController::class, 'index']);
 
-Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);
+Route::post('full-calender-ajax', [FullCalenderController::class, 'ajax']);
 

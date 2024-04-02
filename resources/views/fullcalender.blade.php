@@ -33,10 +33,11 @@
 
         var calendar = $('#calendar').fullCalendar({
             editable: true,
-            events: SITEURL + "/fullcalender",
+            events: SITEURL + "/full-calender",
             displayEventTime: false,
             editable: true,
             eventRender: function (event, element, view) {
+
                 if (event.allDay === 'true') {
                     event.allDay = true;
                 } else {
@@ -51,7 +52,7 @@
                     var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
                     var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
                     $.ajax({
-                        url: SITEURL + "/fullcalenderAjax",
+                        url: SITEURL + "/full-calender-ajax",
                         data: {
                             title: title,
                             start: start,
@@ -76,12 +77,20 @@
                     });
                 }
             },
+            eventDragStart: function(info) {
+                console.log('Event drag started', info.event);
+                // You can perform actions when dragging starts, if needed
+            },
+            eventDragStop: function(info) {
+                console.log('Event drag stopped', info.event);
+                // You can perform actions when dragging stops, if needed
+            },
             eventDrop: function (event, delta) {
                 var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
                 var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
 
                 $.ajax({
-                    url: SITEURL + '/fullcalenderAjax',
+                    url: SITEURL + '/full-calender-ajax',
                     data: {
                         title: event.title,
                         start: start,
@@ -100,7 +109,7 @@
                 if (deleteMsg) {
                     $.ajax({
                         type: "POST",
-                        url: SITEURL + '/fullcalenderAjax',
+                        url: SITEURL + '/full-calender-ajax',
                         data: {
                             id: event.id,
                             type: 'delete'
